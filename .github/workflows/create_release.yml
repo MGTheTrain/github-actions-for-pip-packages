@@ -1,5 +1,3 @@
-
-
 name: CI/CT workflow for Python libraries packaged via pip
 
 on:
@@ -24,23 +22,28 @@ jobs:
     outputs:
       revision_number: ${{ steps.branch_check.outputs.revision_number }}
       semantic_version: ${{ steps.branch_check.outputs.semantic_version }}
-  ci-ct-job-for-rust-actix-web-services:
+  ci-ct-job-for-python-libraries:
     runs-on: ubuntu-latest
     needs: [set_stage]
     steps:
       - name: Checkout code
         uses: actions/checkout@master
-      - name: CI/CT Action for Rust Backend Services
-        uses: MGTheTrain/github-actions/.github/actions/ci-ct-action-for-pip-packages@main
+      - name: Test Python repository
+        uses: MGTheTrain/github-actions/.github/actions/test-python-repository@main
         with:
+          PYTHON_VERSION: "3.11"
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
           SNYK_ORGANIZATION_ID: ${{ secrets.SNYK_ORGANIZATION_ID }}
+          WORKING_DIRECTORY: ./
+      - name: Build and push pip package
+        uses: MGTheTrain/github-actions/.github/actions/build-and-push-pip-packages@main
+        with:
+          PYTHON_VERSION: "3.11"
           CLOUDSMITH_REPOSITORY: ${{ secrets.CLOUDSMITH_REPOSITORY }}
           CLOUDSMITH_API_KEY: ${{ secrets.CLOUDSMITH_API_KEY }}
-          WORKING_DIRECTORY: ./hello-world-service
+          WORKING_DIRECTORY: ./
           PACKAGE_NAME: common_lib
-          SEMANTIC_VERSION: ${{ needs.set_stage.outputs.semantic_version }}
-          REVISION_NUMBER: ''
+          PACKAGE_VERSION: ${{ needs.set_stage.outputs.semantic_version }}
   create-git-tags-from-version-file-job:
     runs-on: ubuntu-latest
     needs: [set_stage]

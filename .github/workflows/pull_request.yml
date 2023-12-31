@@ -47,5 +47,4 @@ jobs:
           CLOUDSMITH_API_KEY: ${{ secrets.CLOUDSMITH_API_KEY }}
           WORKING_DIRECTORY: ./
           PACKAGE_NAME: common_lib
-          SEMANTIC_VERSION: ${{ needs.set_stage.outputs.semantic_version }}
-          REVISION_NUMBER: ${{ needs.set_stage.outputs.revision_number }}
+          PACKAGE_VERSION: ${{ needs.set_stage.outputs.semantic_version }}.${{ needs.set_stage.outputs.revision_number }}

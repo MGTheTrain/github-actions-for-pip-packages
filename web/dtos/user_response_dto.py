@@ -2,6 +2,7 @@ from typing import Optional, Iterable
 from datetime import datetime
 from pydantic import BaseModel
 
+
 class UserResponseDto(BaseModel):
     userId: Optional[str]
     userName: Optional[str]
@@ -10,4 +11,4 @@ class UserResponseDto(BaseModel):
     dateTimeUpdated: Optional[datetime]
 
     def validate(self, validation_context) -> Iterable:
-        pass  
+        pass

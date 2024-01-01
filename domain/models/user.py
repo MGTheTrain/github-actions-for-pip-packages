@@ -25,7 +25,8 @@ class User(BaseModel):
     @validator("userPassword")
     def validate_user_password(cls, v):
         if v is None or len(v) < 10:
-            raise ValueError("userPassword can't be empty or less than 10 characters")
+            raise ValueError(
+                "userPassword can't be empty or less than 10 characters")
         return v
 
     @validator("email")
@@ -54,5 +55,6 @@ class User(BaseModel):
         lower_count = sum(1 for c in v if c.islower())
 
         if special_char_count < 4 or digit_count < 2 or upper_count < 2 or lower_count < 2:
-            raise ValueError("userPassword does not meet complexity requirements.")
+            raise ValueError(
+                "userPassword does not meet complexity requirements.")
         return v

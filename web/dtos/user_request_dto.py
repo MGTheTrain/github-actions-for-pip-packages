@@ -1,7 +1,6 @@
-from typing import Optional, Iterable
-from dataclasses import dataclass
-from datetime import datetime
-from pydantic import BaseModel, validator, ValidationError
+from typing import Optional
+from pydantic import BaseModel, validator
+
 
 class UserRequestDto(BaseModel):
     userName: Optional[str]
@@ -33,6 +32,11 @@ class UserRequestDto(BaseModel):
         upper_count = sum(1 for c in v if c.isupper())
         lower_count = sum(1 for c in v if c.islower())
 
-        if special_char_count < 4 or digit_count < 2 or upper_count < 2 or lower_count < 2:
+        if (
+            special_char_count < 4
+            or digit_count < 2
+            or upper_count < 2
+            or lower_count < 2
+        ):
             raise ValueError("userPassword does not meet complexity requirements.")
         return v

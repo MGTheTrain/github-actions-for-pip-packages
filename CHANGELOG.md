@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Github Action workflow for linting and auto-formatting
+- add [.flake8](.flake8) file
 
 ### Fixed
 

@@ -1,7 +1,6 @@
-from typing import Optional, Iterable
-from dataclasses import dataclass
+from typing import Optional
 from datetime import datetime
-from pydantic import BaseModel, validator, ValidationError
+from pydantic import BaseModel, validator
 
 class User(BaseModel):
     userId: Optional[str]

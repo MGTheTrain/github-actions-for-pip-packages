@@ -23,10 +23,10 @@ class User(BaseModel):
                 "userName can't be empty or exceed 50 characters")
         return v
 
-    @validator("userPassword")  # noqa: E501
+    @validator("userPassword")  
     def validate_user_password(cls, v):
         if v is None or len(v) < 10:
-            raise ValueError( # noqa: E501
+            raise ValueError( 
                 "userPassword can't be empty or less than 10 characters")
         return v
 
@@ -40,7 +40,7 @@ class User(BaseModel):
     def validate_date_time_created(cls, v):
         if v is None:
             raise ValueError("dateTimeCreated can't be empty")
-        return v
+        return v 
 
     @validator("dateTimeUpdated")
     def validate_date_time_updated(cls, v):
@@ -48,7 +48,7 @@ class User(BaseModel):
             raise ValueError("dateTimeUpdated can't be empty")
         return v
 
-    @validator("userPassword")  # noqa: E501
+    @validator("userPassword")  
     def validate_password_complexity(cls, v):
         special_char_count = sum(1 for c in v if not c.isalnum())
         digit_count = sum(1 for c in v if c.isdigit())
@@ -59,4 +59,4 @@ class User(BaseModel):
                 upper_count < 2 or lower_count < 2):
             raise ValueError(
                 "userPassword does not meet complexity requirements.")
-        return v # noqa: E501
+        return v 
